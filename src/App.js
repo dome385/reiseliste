@@ -27,7 +27,7 @@ function App() {
         onDeleteItem={handleDeleteItem}
         onToggleItems={handleToggleItem}
       />
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 }
@@ -107,11 +107,23 @@ function Item({ item, onDeleteItem, onToggleItems }) {
   );
 }
 
-function Stats() {
+function Stats({ items }) {
+  if (!items.length)
+    return (
+      <p className="stats">
+        <em>Füge Gegenstände deiner Reiseliste hinzu</em>
+      </p>
+    );
+  const numItems = items.length;
+  const numPacked = items.filter((items) => items.packed).length;
+  const percentage = Math.round((numPacked / numItems) * 100);
   return (
     <footer className="stats">
       <em>
-        Du hast X Dinge in deiner Liste und du hast bereits X% eingepackt.
+        {percentage === 100
+          ? "Du hast alles eingepackt!"
+          : `Du hast ${numItems} Gegenstände in deiner Liste und du hast bereits
+        ${numPacked} (${percentage})% von deiner Liste eingepackt.`}
       </em>
     </footer>
   );
