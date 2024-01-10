@@ -18,11 +18,19 @@ function App() {
       )
     );
   }
+
+  function handleClearButton() {
+    const confirmed = window.confirm(
+      "Bist du sicher, dass du alle Gegenstände löschen möchtest?"
+    );
+    if (confirmed) setItems([]);
+  }
   return (
     <div className="app">
       <Logo />
       <Form onAddItems={handleAddItems} />
       <PackingList
+        handleClearButton={handleClearButton}
         items={items}
         onDeleteItem={handleDeleteItem}
         onToggleItems={handleToggleItem}
@@ -74,7 +82,12 @@ function Form({ onAddItems }) {
   );
 }
 
-function PackingList({ items, onDeleteItem, onToggleItems }) {
+function PackingList({
+  items,
+  onDeleteItem,
+  onToggleItems,
+  handleClearButton,
+}) {
   const [sortBy, setSortBy] = useState("input");
 
   let sortedItems;
@@ -109,6 +122,7 @@ function PackingList({ items, onDeleteItem, onToggleItems }) {
           <option value="description">Nach Name sortieren</option>
           <option value="packed">Nach gepackt sortieren</option>
         </select>
+        <button onClick={handleClearButton}>Liste leeren</button>
       </div>
     </div>
   );
