@@ -1,4 +1,4 @@
-![]()
+![](https://github.com/dome385/reiseliste/blob/main/src/Recording%202024-01-10%20at%2016.09.37.gif)
 
 # Getting Started with Create React App
 
